@@ -63,12 +63,11 @@ interface ICoin {
 }
 
 function Coins() {
-  const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
-
+  const { isLoading, error, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
   return (
     <Container>
       <Header>
-        <Title></Title>
+        <Title>Coin</Title>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
