@@ -74,6 +74,21 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
+const BackBtn = styled.button`
+  background-color: ${(props) => props.theme.bgColor};
+  border: 3px solid ${(props) => props.theme.textColor};
+  border-radius: 20%;
+  color: ${(props) => props.theme.textColor};
+  font-size: medium;
+  padding: 10px 10px;
+  cursor: pointer;
+  float: left;
+`;
+
+const Spacer = styled.div`
+  flex-grow: 1;
+`;
+
 interface RouteParams {
   coinId: string;
 }
@@ -167,9 +182,14 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
+        <BackBtn>
+          <Link to={`/`}>&larr; Back</Link>
+        </BackBtn>
+        <Spacer />
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
+        <Spacer />
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
