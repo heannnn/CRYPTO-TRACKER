@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.35.3",
+    "gh-pages": "^4.0.0",
     "query": "^0.2.0",
     "react": "^18.1.0",
     "react-apexcharts": "^1.4.0",
@@ -22,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +54,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.25",
     "typescript": "^4.7.3"
-  }
+  },
+  "homepage": "https://heannnn.github.io/CRYPTO-TRACKER"
 }

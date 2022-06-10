@@ -1,6 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { DarkTheme, LightTheme } from "./theme";
+import { useState } from "react";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -65,13 +67,34 @@ a{
 }
 `;
 
+const Button = styled.button`
+  background-color: ${(props) => props.theme.bgColor};
+  border: none;
+  color: ${(props) => props.theme.accentColor};
+  font-size: medium;
+  padding: 10px 10px;
+  cursor: pointer;
+  float: right;
+`;
+
 function App() {
+  const [theme, setTheme] = useState(DarkTheme);
+  const toggleTheme = () => {
+    // if the theme is not light, then set it to dark
+    if (theme === LightTheme) {
+      setTheme(DarkTheme);
+      // otherwise, it should be light
+    } else {
+      setTheme(LightTheme);
+    }
+  };
   return (
-    <>
+    <ThemeProvider theme={theme === LightTheme ? LightTheme : DarkTheme}>
       <GlobalStyle />
+      <Button onClick={toggleTheme}>Toggle theme</Button>
       <Router />
       <ReactQueryDevtools initialIsOpen={true} />
-    </>
+    </ThemeProvider>
   );
 }
 

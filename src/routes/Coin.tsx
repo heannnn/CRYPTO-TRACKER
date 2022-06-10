@@ -74,11 +74,10 @@ const Tab = styled.span<{ isActive: boolean }>`
   }
 `;
 
-const BackBtn = styled.button`
+const Button = styled.button`
   background-color: ${(props) => props.theme.bgColor};
-  border: 3px solid ${(props) => props.theme.textColor};
-  border-radius: 20%;
-  color: ${(props) => props.theme.textColor};
+  border: none;
+  color: ${(props) => props.theme.accentColor};
   font-size: medium;
   padding: 10px 10px;
   cursor: pointer;
@@ -182,14 +181,13 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
-        <BackBtn>
+        <Button>
           <Link to={`/`}>&larr; Back</Link>
-        </BackBtn>
+        </Button>
         <Spacer />
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
-        <Spacer />
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
