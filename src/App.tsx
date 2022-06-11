@@ -2,7 +2,8 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { DarkTheme, LightTheme } from "./theme";
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -78,13 +79,10 @@ const Button = styled.button`
 `;
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
-  const toggleDark = () => setIsDark((current) => !current);
-
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <>
       <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
-        <Button onClick={toggleDark}>Toggle Mode</Button>
         <GlobalStyle />
         <Router />
         <ReactQueryDevtools initialIsOpen={true} />
@@ -94,3 +92,12 @@ function App() {
 }
 
 export default App;
+
+// 현재는 Theme 정보를 전달하기 위해 많은 단계를 거침
+// App(isDark, modifierFn)
+// => Router => Coins (modifierFn)
+// => Router => Coin => Chart (isDark)
+// EX) 많은 컴포넌트에서 로그인 유무에 대한 정보를 알고싶을때
+// => state management가 필요함 (Recoil)
+// state management 이용) 부모가 자식에게 props를 내려주는 계층 구조 대신
+// state를 따로 bubble(Atom)에 담아 각 컴포넌트가 필요할 때 bubble에 접근해서 사용할 수 있게 함
