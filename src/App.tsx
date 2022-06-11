@@ -78,23 +78,18 @@ const Button = styled.button`
 `;
 
 function App() {
-  const [theme, setTheme] = useState(DarkTheme);
-  const toggleTheme = () => {
-    // if the theme is not light, then set it to dark
-    if (theme === LightTheme) {
-      setTheme(DarkTheme);
-      // otherwise, it should be light
-    } else {
-      setTheme(LightTheme);
-    }
-  };
+  const [isDark, setIsDark] = useState(false);
+  const toggleDark = () => setIsDark((current) => !current);
+
   return (
-    <ThemeProvider theme={theme === LightTheme ? LightTheme : DarkTheme}>
-      <GlobalStyle />
-      <Button onClick={toggleTheme}>Toggle theme</Button>
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={isDark ? DarkTheme : LightTheme}>
+        <Button onClick={toggleDark}>Toggle Mode</Button>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
+    </>
   );
 }
 
